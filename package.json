@@ -4,12 +4,13 @@
     "nodemon": "^3.0.1",
     "socket.io": "^4.6.1"
   },
-  "name": "reactwordle",
+  "name": "wordle-multiplayer",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "dev": "nodemon src/game.js"
+    "dev": "nodemon src/game.js",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
