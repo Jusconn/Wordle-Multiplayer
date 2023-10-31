@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Multiplayer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>WORDLE MULTIPLAYER</h1>
+    <div id="players-container">
+        <div id="name1"></div>
+        <h2>VS</h2>
+        <div id="name2"></div>
+    </div>
+    <div id="roomCode"></div>
+    <div id = message></div>
+    <div id = "game"> 
+        <div class="grid">
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="game.js"></script>
+</body>
+</html>

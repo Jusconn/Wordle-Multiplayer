@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <label for="name">Enter Your Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+
+    <label for="roomCode">Enter Room Code:</label>
+    <input type="text" id="roomCode" name="roomCode"><br><br>
+    <label for="secretWord">Enter Your Secret Word:</label>
+    <input type="text" id="secretWord" name="secretWord"><br><br>
+
+    <button type="button" class="join-room-button" id="join-room-button">Join Room</button>
+    <p>-- OR --</p>
+    <button type="button" class="create-room-button" id="create-room-button">Create Room</button>
+
+    <script>
+
+async function loadDictionary() {
+    try {
+        const response = await fetch('dictionary.json');
+        const data = await response.json();
+        return data.words;
+    } catch (error) {
+        console.error('Error loading dictionary:', error);
+        return [];
+    }
+}
+
+let dictionary = [];
+
+loadDictionary().then(words => {
+    dictionary = words;
+});
+        // You can add JavaScript functionality here if needed
+        // For example, you might want to add event listeners to the buttons or text boxes
+        const joinRoomButton = document.getElementById('join-room-button');
+        const createRoomButton = document.getElementById('create-room-button');
+        const nameInput = document.getElementById('name');
+        const roomCodeInput = document.getElementById('roomCode');
+        const secretWordInput = document.getElementById('secretWord');
+
+        joinRoomButton.addEventListener('click', function () {
+            // Perform actions when the "Create Room" button is clicked
+            const name = nameInput.value;
+            const roomCode = roomCodeInput.value;
+            const secretWord = secretWordInput.value;
+
+            if (name.length < 1) {
+        alert('Name must have at least 1 character.');
+        return; // Stop execution if the name is not valid
+    }
+
+    if (secretWord.length !== 5) {
+        alert('Secret word must be 5 characters long.');
+        return; // Stop execution if the secret word is not valid
+    }
+    if (!dictionary.includes(secretWord)) {
+        alert('Invalid Secret Word');
+        return; // Stop execution if the secret word is not valid
+    }
+
+    window.location.href = `http://localhost:3000/game.html?pname=${encodeURIComponent(name)}&roomCode=${encodeURIComponent(roomCode)}&word=${encodeURIComponent(secretWord)}&act=${encodeURIComponent("join")}`;
+            // Add logic to create a room with the given name and room code
+        });
+
+        function generateRoomCode(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let roomCode = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        roomCode += characters[randomIndex];
+    }
+
+    return roomCode;
+}
+
+        createRoomButton.addEventListener('click', function () {
+            // Perform actions when the "Create Room" button is clicked
+            let name = nameInput.value;
+            const roomCode = generateRoomCode(6);
+            let secretWord = secretWordInput.value;
+
+            if (name.length < 1) {
+        alert('Name must have at least 1 character.');
+        return; // Stop execution if the name is not valid
+    }
+
+    if (secretWord.length !== 5) {
+        alert('Secret word must be 5 characters long.');
+        return; // Stop execution if the secret word is not valid
+    }
+    if (!dictionary.includes(secretWord)) {
+        alert('Invalid Secret Word');
+        return; // Stop execution if the secret word is not valid
+    }
+
+    window.location.href = `http://localhost:3000/game.html?pname=${encodeURIComponent(name)}&roomCode=${encodeURIComponent(roomCode)}&word=${encodeURIComponent(secretWord)}&act=${encodeURIComponent("create")}`;
+
+        });
+    </script>
+    <script src = "game.js" type="module"></script>
+</body>
+
+</html>
