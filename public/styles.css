@@ -102,6 +102,30 @@ html, body {
     animation: flip 0.5s ease;
 }
 
+#keyboard-cont {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#keyboard-cont div {
+  display: flex;
+}
+
+.second-row {
+  margin: 0.5rem 0;
+}
+
+.keyboard-button {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem;
+  margin: 0 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
 
 @keyframes flip {
     0% {
