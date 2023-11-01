@@ -72,7 +72,7 @@ loadDictionary().then(words => {
         });
 
         function generateRoomCode(length) {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let roomCode = '';
 
     for (let i = 0; i < length; i++) {
@@ -86,7 +86,7 @@ loadDictionary().then(words => {
         createRoomButton.addEventListener('click', function () {
             // Perform actions when the "Create Room" button is clicked
             let name = nameInput.value;
-            const roomCode = generateRoomCode(6);
+            const roomCode = generateRoomCode(4);
             let secretWord = secretWordInput.value;
 
             if (name.length < 1) {
