@@ -1,5 +1,6 @@
 const socket = io();
 let dictionary = [];
+let oppWin = 0;
 let message = "";
 let oppName ="";
 let oppWord = "";
@@ -39,7 +40,7 @@ socket.on('connect',async() =>{
     });
 
     socket.on('opponentWin', (data) => {
-       const oppWin = data
+       oppWin = data
         message = `${oppName} guessed right in ${oppWin} tries!`;
         document.getElementById("message").textContent = message;
 
@@ -197,8 +198,14 @@ function revealWord(guess){
     const isGameOver = state.currentRow === 5;
     setTimeout(() => {
         if(isWinner){
+            if(oppWin != 0 && oppWin < state.currentRow){
+                if(state.currentRow - oppWin === 1){
+                    alert(`${oppName} wins, they beat you by 1 guess!`);
+                }
+                alert(`${oppName} wins, they beat you by ${state.currentRow-oppWin} guesses!`);
+            }
             socket.emit('win',{roomCode:roomCode, guess:state.currentRow});
-            alert('You Won!');
+            alert('You guessed it!');
         } else if(isGameOver){
             alert(`Game Over! The word was ${state.secret}.`);
         }
