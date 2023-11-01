@@ -56,6 +56,30 @@
         </div>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const keyboardButtons = document.querySelectorAll(".keyboard-button");
+    
+    keyboardButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const buttonValue = button.textContent;
+
+            // Create a new keyboard event
+            const event = new KeyboardEvent("keydown", {
+                key: buttonValue,
+                code: `Key${buttonValue.toUpperCase()}`,
+                charCode: buttonValue.charCodeAt(0),
+                keyCode: buttonValue.charCodeAt(0),
+                view: window,
+                bubbles: true,
+                cancelable: true
+            });
+
+            // Dispatch the keyboard event
+            document.dispatchEvent(event);
+        });
+    });
+});
+
         
 </script>
 <script src="/socket.io/socket.io.js"></script>
