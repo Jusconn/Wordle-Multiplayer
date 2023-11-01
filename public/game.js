@@ -120,6 +120,7 @@ function drawBox(container,row,col,letter = ''){
 
 }
 function registerKeyboardEvents(){
+    console.log('run');
     document.body.onkeydown = (e) => {
         const key = e.key;
         if (key == 'Enter'){
