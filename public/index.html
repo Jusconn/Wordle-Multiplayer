@@ -67,7 +67,7 @@ loadDictionary().then(words => {
         return; // Stop execution if the secret word is not valid
     }
 
-    window.location.href = `http://localhost:3000/game.html?pname=${encodeURIComponent(name)}&roomCode=${encodeURIComponent(roomCode)}&word=${encodeURIComponent(secretWord)}&act=${encodeURIComponent("join")}`;
+    window.location.href = `https://wordle-multiplayer-production.up.railway.app/game.html?pname=${encodeURIComponent(name)}&roomCode=${encodeURIComponent(roomCode)}&word=${encodeURIComponent(secretWord)}&act=${encodeURIComponent("join")}`;
             // Add logic to create a room with the given name and room code
         });
 
@@ -103,7 +103,7 @@ loadDictionary().then(words => {
         return; // Stop execution if the secret word is not valid
     }
 
-    window.location.href = `http://localhost:3000/game.html?pname=${encodeURIComponent(name)}&roomCode=${encodeURIComponent(roomCode)}&word=${encodeURIComponent(secretWord)}&act=${encodeURIComponent("create")}`;
+    window.location.href = `https://wordle-multiplayer-production.up.railway.app/game.html?pname=${encodeURIComponent(name)}&roomCode=${encodeURIComponent(roomCode)}&word=${encodeURIComponent(secretWord)}&act=${encodeURIComponent("create")}`;
 
         });
     </script>
