@@ -66,6 +66,7 @@
     });
 
     function simulateKeyPress(key) {
+        console.log(key);
         const event = new KeyboardEvent('keydown', {
             key: key,
             bubbles: true,
