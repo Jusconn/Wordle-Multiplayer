@@ -10,7 +10,7 @@
   "devDependencies": {},
   "scripts": {
     "dev": "nodemon src/game.js",
-    "start": "node src/index.js"
+    "start": "node src/game.js"
   },
   "keywords": [],
   "author": "",
