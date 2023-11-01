@@ -198,7 +198,7 @@ function revealWord(guess){
     setTimeout(() => {
         if(isWinner){
             socket.emit('win',{roomCode:roomCode, guess:state.currentRow});
-            alert('You guessed it in ${state.currentRow}!');
+            alert(`You guessed it in ${state.currentRow}!`);
         } else if(isGameOver){
             alert(`Game Over! The word was ${state.secret}.`);
         }
