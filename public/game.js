@@ -69,7 +69,7 @@ async function params() {
     const urlParams = new URLSearchParams(urlstring);
     console.log(urlParams);
     console.log('URL Parameters - before:', urlParams.get('pname'));
-    playerName = urlParams.get('http://localhost:3000/game.html?pname');
+    playerName = urlParams.get('https://wordle-multiplayer-production.up.railway.app/game.html?pname');
     act = urlParams.get('act');
     console.log(playerName);
     roomCode = urlParams.get('roomCode');
