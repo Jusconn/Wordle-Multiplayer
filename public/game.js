@@ -1,4 +1,4 @@
-const socket = io(`ws://localhost:3000`);
+const socket = io();
 let dictionary = [];
 let message = "";
 let oppName ="";
