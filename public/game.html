@@ -66,15 +66,18 @@ buttons.forEach(button => {
 });
 
 function simulateKeyPress(key) {
-    console.log(key);
-    const event = document.createEvent('Event');
-    event.initEvent('keydown', true, true);
-    event.key = key;
-    event.keyCode = key.charCodeAt(0);
+    const event = new KeyboardEvent('keydown', {
+        key: key,
+        code: 'Key' + key.toUpperCase(), // Key code representation
+        keyCode: key.charCodeAt(0), // Unicode of the pressed key
+        bubbles: true,
+        cancelable: true,
+    });
 
     // Dispatch the event to simulate a key press
     document.dispatchEvent(event);
 }
+
 
 </script>
 <script src="/socket.io/socket.io.js"></script>
