@@ -9,8 +9,8 @@
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "dev": "nodemon src/game.js",
-    "start": "node src/game.js"
+    "dev": "nodemon src/game.js --omit=dev",
+    "start": "node src/game.js --omit=dev"
   },
   "keywords": [],
   "author": "",
