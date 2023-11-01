@@ -56,29 +56,7 @@
         </div>
     </div>
     <script>
-    const buttons = document.querySelectorAll('.keyboard-button');
-
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const key = button.innerText;
-        simulateKeyPress(key);
-    });
-});
-
-function simulateKeyPress(key) {
-    const event = new KeyboardEvent('keydown', {
-        key: key,
-        code: 'Key' + key.toUpperCase(), // Key code representation
-        keyCode: key.charCodeAt(0), // Unicode of the pressed key
-        bubbles: true,
-        cancelable: true,
-    });
-
-    // Dispatch the event to simulate a key press
-    document.dispatchEvent(event);
-}
-
-
+        
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script type="module" src="game.js"></script>
