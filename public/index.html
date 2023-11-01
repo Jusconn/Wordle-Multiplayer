@@ -86,8 +86,7 @@ loadDictionary().then(words => {
             // Perform actions when the "Create Room" button is clicked
             let name = nameInput.value;
             const roomCode = generateRoomCode(4);
-            let secretWord = secretWordInput.value;
-
+            const secretWord = secretWordInput.value.toLowerCase();
             if (name.length < 1) {
         alert('Name must have at least 1 character.');
         return; // Stop execution if the name is not valid
