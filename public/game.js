@@ -167,7 +167,7 @@ function getCurrentWord(){
 }
 
 function isWordValid(word){
-    word = toLowerCase(word);
+    word = toLowerCase();
     return dictionary.includes(word);
 
 }
