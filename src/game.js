@@ -1,3 +1,4 @@
+//server set up
 const express = require('express');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
@@ -7,19 +8,20 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 const activeSockets = {};
 const rooms = {};
 
+//event handlers
 io.on('connection', (socket) => {
     console.log('User Connected', socket.id);
 
 
     // Event handler for creating a new room
     socket.on('createRoom', (code) => {
-        const roomCode = code; // Function to generate a unique room code
-        rooms[roomCode] = { players: [socket.id] }; // Store the room details (you can add more data as needed)
+        const roomCode = code; 
+        rooms[roomCode] = { players: [socket.id] }; // Store the room details
         socket.join(roomCode); // Add the socket to the room
         socket.emit('roomCreated', roomCode); // Notify the client about the created room
         console.log(`User ${socket.id} created room ${roomCode}`);
@@ -56,11 +58,12 @@ io.on('connection', (socket) => {
     socket.on('turn', (data) => {
         roomCode = data.roomCode;
         currentRow = data.guess;
+        word = data.word;
         console.log(`Received player move`);
         // Handle the playerMove event
 
         // Broadcast the move to all other connected clients except the sender
-        socket.to(roomCode).emit('opponentTurn', currentRow+1);
+        socket.to(roomCode).emit('opponentTurn', {guess:currentRow+1,word:word});
     });
 
     socket.on('win', (data) => {
