@@ -87,8 +87,8 @@ async function loadDictionary() {
     try {
         const response = await fetch('dictionary.json');
         const data = await response.json();
-        return data.words;
         console.log('dic loaded');
+        return data.words;
     } catch (error) {
         console.error('Error loading dictionary:', error);
         return [];
