@@ -32,8 +32,10 @@ socket.on('connect',async() =>{
     });
 
     socket.on('opponentTurn', (data) => {
-        const opponentTurn = data;
-        message =`${oppName} is on guess: ${data}`;
+        const opponentTurn = data.guess;
+        const word = data.word;
+        updateProgBar(word);
+        message =`${oppName} is on guess: ${data.guess}`;
         document.getElementById("message").textContent = message;
 
     });
@@ -46,11 +48,9 @@ socket.on('connect',async() =>{
     });
     socket.on('data', (data) => {
         console.log('recieved opp data');
-        console.log(data.name);
         oppName = data.name;
         console.log(oppName);
         state.secret = data.word;
-        console.log(data.word);
 
         message =`${oppName} is on guess: 1`;
         document.getElementById("message").textContent = message;
@@ -62,14 +62,17 @@ socket.on('connect',async() =>{
                 name2Element.textContent = oppName;
             }}
 
+            const opp = document.getElementById('players-container')
+        drawOppProgress(opp);
     });
+    
 })
 async function params() {
     const urlstring = window.location.href;
     const urlParams = new URLSearchParams(urlstring);
     console.log(urlParams);
-    console.log('URL Parameters - before:', urlParams.get('pname'));
-    playerName = urlParams.get('https://wordle-multiplayer-production.up.railway.app/game.html?pname');
+    //console.log('URL Parameters - before:', urlParams.get('pname'));
+    playerName = urlParams.get('pname');
     act = urlParams.get('act');
     console.log(playerName);
     roomCode = urlParams.get('roomCode');
@@ -129,7 +132,7 @@ function registerKeyboardEvents(){
                     revealWord(word);
                     state.currentRow++;
                     state.currentCol = 0;
-                    socket.emit('turn',{roomCode:roomCode,guess:state.currentRow});
+                    socket.emit('turn',{roomCode:roomCode,guess:state.currentRow,word:word});
                 }
                 else{
                     alert('Not a valid word.');
@@ -148,7 +151,15 @@ function registerKeyboardEvents(){
         updateGrid();
     };
 }
+function drawOppProgress(container){
+    const bar = document.createElement('div');
+    bar.className = 'bar';
 
+    for(let i = 0; i<5; i++){
+        drawBox(bar,i,7);
+    }
+    container.appendChild(bar);
+}
 function drawGrid(container){
     const grid = document.createElement('div');
     grid.className = 'grid';
@@ -171,6 +182,27 @@ function isWordValid(word){
     return dictionary.includes(word);
 
 }
+function updateProgBar(word){
+    const animation_duration = 500;
+    for(let i = 0; i<5; i++){
+        const box = document.getElementById(`box${i}${7}`)
+        const letter = word[i];
+        setTimeout(() =>  {if(letter === secretWord[i]){
+            box.classList.add('right');
+        } else if(secretWord.includes(letter)){
+            box.classList.add('wrong');
+        } else{
+            box.classList.add('empty');
+        }
+        }, ((i + 1)* animation_duration)/2);
+        
+        
+            box.classList.add('animated');
+            box.style.animationDelay = `${(i * animation_duration)/2}ms`;
+        }
+
+
+    }
 
 function revealWord(guess){
     const row = state.currentRow;
@@ -237,4 +269,4 @@ function startup(){
         registerKeyboardEvents();
     };
 
-//left off on startinput function
+
